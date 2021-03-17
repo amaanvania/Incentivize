@@ -16,15 +16,18 @@ public class Condition {
     int id;
 
 
-    private int incentive_ID;
+    private int incentive_id;
 
     private String name;
 
     private String category;
 
+    public Condition(){
 
-    public Condition(int incentive_ID, String name, String category) {
-        this.incentive_ID = incentive_ID;
+    }
+    public Condition(int id, int incentive_id, String name, String category) {
+        this.id = id;
+        this.incentive_id = incentive_id;
         this.name = name;
         this.category = category;
     }
@@ -37,12 +40,12 @@ public class Condition {
         this.id = id;
     }
 
-    public int getIncentive_ID() {
-        return incentive_ID;
+    public int getIncentive_id() {
+        return incentive_id;
     }
 
-    public void setIncentive_ID(int incentive_ID) {
-        this.incentive_ID = incentive_ID;
+    public void setIncentive_id(int incentive_id) {
+        this.incentive_id = incentive_id;
     }
 
     public String getName() {

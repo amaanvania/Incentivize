@@ -19,7 +19,9 @@ public class Incentive {
 
     private String category;
 
+    public Incentive(){
 
+    }
     public Incentive(int id, String name, String category) {
         this.id = id;
         this.name = name;
