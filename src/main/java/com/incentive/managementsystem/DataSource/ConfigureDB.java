@@ -16,11 +16,6 @@ import javax.sql.DataSource;
 public class ConfigureDB extends WebMvcConfigurerAdapter{
 
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-    }
-
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

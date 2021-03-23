@@ -28,7 +28,7 @@ public class Client {
     public Client(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        this.authCode = "";
+        this.authCode = null;
     }
 
     public void setId(int id) {

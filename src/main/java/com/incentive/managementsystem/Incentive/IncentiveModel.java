@@ -1,6 +1,7 @@
 package com.incentive.managementsystem.Incentive;
 
 import com.incentive.managementsystem.Condition.Condition;
+import com.incentive.managementsystem.Condition.ConditionModel;
 import com.incentive.managementsystem.Condition.ConditionRepository;
 import com.incentive.managementsystem.Threshold.Threshold;
 import com.incentive.managementsystem.Threshold.ThresholdRepository;
@@ -26,15 +27,20 @@ public class IncentiveModel {
     @Autowired
     private ConditionRepository conditionRepository;
 
+    @Autowired
+    private ConditionModel conditionModel;
+
+
     public boolean isIncentiveFulfilled(int id, Map<String, String> params){
+
+        //first check if incentive exists
         if(!incentiveRepository.existsById(id)) return false;
 
-        for(String temp : params.keySet()){
-            System.out.println(temp + "\t" + params.get(temp));
-        }
+        //generate all conditions and thresholds
         List<Condition> tempConditionList = conditionRepository.findAll();
         List<Threshold> tempList = thresholdRepository.findAll();
 
+        //store the relevant conditions in a hashset
         HashSet<Integer> conditions = new HashSet<>();
         for(Condition c : tempConditionList){
             if(c.getIncentive_id() == id){
@@ -42,6 +48,7 @@ public class IncentiveModel {
             }
         }
 
+        //validate every single threshold
         for(Threshold temp : tempList){
             if(conditions.contains(temp.getCondition_id())){
                 if(!params.containsKey(temp.getParameterName())) { //we dont have this parameter
@@ -81,5 +88,21 @@ public class IncentiveModel {
             }
         }
         return true;
+    }
+
+    public int removeIncentive(int id){
+        if(!incentiveRepository.existsById(id)) return -1;
+        List<Condition> conditions = conditionRepository.findAll();
+
+        for(Condition temp : conditions){
+            if(temp.getIncentive_id() == id){
+                conditionModel.removeCondition(temp.getId());
+            }
+        }
+
+        incentiveRepository.deleteById(id);
+
+        return 200;
+
     }
 }

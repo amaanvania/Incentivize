@@ -67,4 +67,11 @@ public class IncentiveController {
                 .created(linkTo(methodOn(IncentiveController.class).one(newIncentive.getId())).toUri()) //
                 .body(assembler.toModel(newIncentive));
     }
+
+    @DeleteMapping("/incentive/{id}")
+    int remove(@PathVariable int id) {
+        return model.removeIncentive(id);
+
+    }
+
 }

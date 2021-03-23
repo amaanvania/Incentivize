@@ -54,4 +54,13 @@ public class ThresholdController {
                 .created(linkTo(methodOn(ThresholdController.class).one(newThreshold.getId())).toUri()) //
                 .body(assembler.toModel(newThreshold));
     }
+
+    @DeleteMapping("/threshold/{id}")
+    int remove(@PathVariable int id) {
+        thresholdRepository.deleteById(id);
+
+        if(thresholdRepository.existsById(id)) return -1;
+        else return 200;
+
+    }
 }

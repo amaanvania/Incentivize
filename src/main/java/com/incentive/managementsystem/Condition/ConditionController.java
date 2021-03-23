@@ -3,6 +3,7 @@ package com.incentive.managementsystem.Condition;
 import com.incentive.managementsystem.Condition.ConditionModelAssembler;
 import com.incentive.managementsystem.Condition.ConditionNotFoundException;
 import com.incentive.managementsystem.Condition.ConditionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class ConditionController {
     private final ConditionRepository conditionRepository;
     private final ConditionModelAssembler assembler;
+
+    @Autowired
+    private ConditionModel conditionModel;
 
     ConditionController(ConditionRepository cr, ConditionModelAssembler assembler){
         this.conditionRepository = cr;
@@ -53,5 +57,12 @@ public class ConditionController {
         return ResponseEntity //
                 .created(linkTo(methodOn(ConditionController.class).one(newCondition.getId())).toUri()) //
                 .body(assembler.toModel(newCondition));
+    }
+
+
+    @DeleteMapping("/condition/{id}")
+    int remove(@PathVariable int id) {
+        return conditionModel.removeCondition(id);
+
     }
 }
