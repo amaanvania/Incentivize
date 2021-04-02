@@ -19,7 +19,7 @@ public class IncentiveController {
     private final IncentiveModelAssembler assembler;
 
     @Autowired
-    private IncentiveModel model;
+    private IncentiveService service;
 
     IncentiveController(IncentiveRepository cr, IncentiveModelAssembler assembler){
         this.incentiveRepository = cr;
@@ -47,9 +47,9 @@ public class IncentiveController {
     }
 
     @GetMapping("/incentive-fulfilled/{id}/{allRequestParams}")
-    boolean test(@PathVariable int id, @RequestParam Map<String,String> allRequestParams) {
+    boolean incentiveFulfilled(@PathVariable int id, @RequestParam Map<String,String> allRequestParams) {
 
-        boolean temp = model.isIncentiveFulfilled(id,allRequestParams);
+        boolean temp = service.isIncentiveFulfilled(id,allRequestParams);
 
 
         System.out.println("Is Incentive Fulfilled: " + temp);
@@ -70,7 +70,7 @@ public class IncentiveController {
 
     @DeleteMapping("/incentive/{id}")
     int remove(@PathVariable int id) {
-        return model.removeIncentive(id);
+        return service.removeIncentive(id);
 
     }
 

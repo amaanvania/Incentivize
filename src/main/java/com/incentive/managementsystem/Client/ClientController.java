@@ -1,5 +1,6 @@
 package com.incentive.managementsystem.Client;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class ClientController {
     private final ClientRepository clientRepository;
     private final ClientModelAssembler assembler;
+
+    @Autowired
+    private ClientService clientService;
 
     ClientController(ClientRepository cr, ClientModelAssembler assembler){
         this.clientRepository = cr;
@@ -42,10 +46,11 @@ public class ClientController {
     }
 
     @PostMapping("/clients")
-    ResponseEntity<EntityModel<Client>> newClient(@RequestBody Client client) {
+    ResponseEntity<EntityModel<Client>> newClient(@RequestBody Client client) throws ClientExistsException {
 
+        Client newClient = clientService.registerNewClient(client);
 
-        Client newClient = clientRepository.save(client);
+        clientRepository.save(newClient);
 
         return ResponseEntity //
                 .created(linkTo(methodOn(ClientController.class).one(newClient.getId())).toUri()) //

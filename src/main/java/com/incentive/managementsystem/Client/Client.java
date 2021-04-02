@@ -1,34 +1,39 @@
 package com.incentive.managementsystem.Client;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
+
+//class to represent one of our clients - Example: YuRide
 @Entity
 @Table(name = "CLIENTS")
 public class Client {
 
+
     private @Id @GeneratedValue int id;
+
+    @Column(unique=true)
+    private String authCode;
 
     private String userName;
 
+
     private String password;
 
-    private String authCode;
+    public Client(){
 
-    public Client(int id, String userName, String password, String authCode) {
+    };
+
+    public Client(int id, String userName, String password) {
         this.id = id;
         this.userName = userName;
         this.password = password;
-        this.authCode = authCode;
     }
 
+    //use this initially
     public Client(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        this.authCode = null;
     }
 
     public void setId(int id) {
@@ -43,9 +48,6 @@ public class Client {
         this.password = password;
     }
 
-    public void setAuthCode(String authCode) {
-        this.authCode = authCode;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -54,13 +56,12 @@ public class Client {
         Client client = (Client) o;
         return id == client.id &&
                 Objects.equals(userName, client.userName) &&
-                Objects.equals(password, client.password) &&
-                Objects.equals(authCode, client.authCode);
+                Objects.equals(password, client.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, password, authCode);
+        return Objects.hash(id, userName, password);
     }
 
     public int getId() {
@@ -77,5 +78,9 @@ public class Client {
 
     public String getAuthCode() {
         return authCode;
+    }
+
+    public void setAuthCode(String authCode) {
+        this.authCode = authCode;
     }
 }

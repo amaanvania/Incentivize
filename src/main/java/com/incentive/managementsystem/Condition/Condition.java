@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
+//class to represent a condition
 @Entity
 @Table(name = "CONDITIONS")
 public class Condition {

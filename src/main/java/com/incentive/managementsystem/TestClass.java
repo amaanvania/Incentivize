@@ -1,19 +1,17 @@
 package com.incentive.managementsystem;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.UUID;
+
 public class TestClass {
 
     public static void main(String[] args){
 
-        String temp = "testtesttest";
 
-        boolean b;
-        try{
-            boolean tem = Boolean.getBoolean(temp);
-            b = true;
-        }catch (Exception e){
-            b = false;
-        }
+        String uniqueId = UUID.randomUUID().toString().replace("-", "");
 
-        System.out.println(b);
+        System.out.println(uniqueId);
+
     }
 }

@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+//class to represent thresholds (parameters for conditions)
 @Entity
 @Table(name = "THRESHOLDS")
 public class Threshold {
@@ -75,9 +77,9 @@ public class Threshold {
        return returnValue;
     }
 
-    public boolean isInteger(){
+    public boolean isDouble(){
         try{
-            int temp = Integer.parseInt(getValue());
+            double temp = Double.parseDouble(getValue());
             return true;
         }catch (Exception e){
             return false;
