@@ -32,14 +32,14 @@ public class IncentiveService {
     private ClientRepository clientRepository;
 
 
-    public int incentiveFulfilled(int incentive_id, Map<String, String> params){
-        int failureCode = -1;
+    public int incentiveFulfilled(int incentive_id, Map<String, String> params){        int failureCode = -1;
 
         if(params.containsKey("key")){
             String auth = params.get("key");
 
             //basic auth code checking
             //expand on this so relevant to user
+
             if(clientRepository.getClientByAuthCode(auth).size() == 0) return failureCode;
         }else
             return failureCode;
