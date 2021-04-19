@@ -14,19 +14,23 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-
+    /**
+     * Register a new client
+     */
     public Client registerNewClient(Client client) throws Exception {
 
         if(clientRepository.getClientByUserName(client.getUserName()).size() != 0){
            throw new Exception("Client exists");
         }else {
-            //encrypt password
             Client temp = new Client(client.getUserName(), client.getPassword());
             temp.setAuthCode(generateAuthKey());
             return temp;
         }
     }
 
+    /**
+     * Generate unique Auth key for a client
+     */
     public String generateAuthKey(){
         String auth = UUID.randomUUID().toString().replace("-", "");
 

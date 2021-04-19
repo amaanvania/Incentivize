@@ -12,6 +12,12 @@ public class APIService {
     @Autowired
     ThresholdRepository thresholdRepository;
 
+
+    /**
+     * Method which generates a sample API request
+     * for an incentive
+     * Used to generate API requests for clients
+     */
     public String generateAPIRequest(String auth, int incentiveID){
         StringBuilder result = new StringBuilder();
 

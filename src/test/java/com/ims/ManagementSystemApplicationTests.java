@@ -68,7 +68,7 @@ public class ManagementSystemApplicationTests {
 		when(clrMock.getClientByAuthCode(Mockito.anyString())).thenReturn(clientList);
 		when(thrMock.getThresholdsByCondition(Mockito.anyInt())).thenReturn(tlist);
 
-		assertEquals(-1, is.incentiveFulfilled(1, params));
+		assertEquals("Incentive does not exist", is.incentiveFulfilled(1, params));
 	}
 
 	@Test

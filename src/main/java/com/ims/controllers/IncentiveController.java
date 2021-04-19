@@ -36,17 +36,6 @@ public class IncentiveController {
         return incentiveRepository.getOne(id);
     }
 
-    @GetMapping("/incentive-fulfilled/{id}/{allRequestParams}")
-    boolean incentiveFulfilled(@PathVariable int id, @RequestParam Map<String,String> allRequestParams) {
-
-        boolean temp = service.isIncentiveFulfilled(id,allRequestParams);
-
-
-        System.out.println("Is Incentive Fulfilled: " + temp);
-
-        return temp;
-    }
-
 
     @GetMapping("/incentive/generateAPI/{incentive_id}/{client_id}")
     String generateAPI(@PathVariable int incentive_id, @PathVariable int client_id) throws Exception {

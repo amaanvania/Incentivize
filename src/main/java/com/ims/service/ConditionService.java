@@ -17,6 +17,10 @@ public class ConditionService {
     @Autowired
     private ConditionRepository conditionRepository;
 
+    /**
+     * Method which removes a condition
+     * and all its subsequent thresholds
+     */
     public int removeCondition(int condition){
         List<Threshold> thresholds = thresholdRepository.findAll();
 

@@ -8,7 +8,6 @@ import com.ims.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +32,10 @@ public class IncentiveService {
     @Autowired
     private ProjectRepository projectRepository;
 
-
+    /**
+     * Method which returns the auth code
+     * of client by their id
+     */
     public String getAuthCodeByClientID(int client_id) throws Exception {
         Client c = clientRepository.getOne(client_id);
         if(c == null || c.equals(null)) throw new Exception("");
@@ -41,6 +43,10 @@ public class IncentiveService {
         return c.getAuthCode();
     }
 
+    /**
+     * Method which validates an auth code
+     * by client auth
+     */
     public boolean validateAuthCodeByClientID(int incentive_id, int client_id){
 
         Client c = clientRepository.getOne(client_id);
@@ -57,6 +63,15 @@ public class IncentiveService {
 
     }
 
+    /**
+     * Method which validates an auth code
+     * and check if the auth code belongs
+     * to the incentive
+     *
+     * @param auth the clients auth code
+     *
+     * @param incentive_id the incentive id
+     */
     public boolean validateAuthCode(String auth, int incentive_id){
 
         List<Client> clients = clientRepository.getClientByAuthCode(auth);
@@ -69,6 +84,11 @@ public class IncentiveService {
 
     }
 
+    /**
+     * Method which validates incentives, and checks if they are fulfilled
+     * given a map of parameters which includes an auth key
+     * and all threshold values under that incentive
+     */
     public String incentiveFulfilled(int incentive_id, Map<String, String> params){
 
         List<Incentive> incentives = incentiveRepository.getIncentivesByID(incentive_id);
@@ -128,74 +148,11 @@ public class IncentiveService {
         return "Success";
     }
 
-    public boolean isIncentiveFulfilled(int id, Map<String, String> params){
 
-        //first check if incentive exists
-        if(!incentiveRepository.existsById(id)) return false;
-        if(params == null) return false;
-        if(params.containsKey("key")){
-            String auth = params.get("key");
-
-            //basic auth code checking
-            //expand on this so relevant to user
-            if(clientRepository.getClientByAuthCode(auth).size() == 0) return false;
-        }else
-            return false;
-
-        //generate all conditions and thresholds
-        List<Condition> tempConditionList = conditionRepository.findAll();
-        List<Threshold> tempList = thresholdRepository.findAll();
-
-        //store the relevant conditions in a hashset
-        HashSet<Integer> conditions = new HashSet<>();
-        for(Condition c : tempConditionList){
-            if(c.getIncentive_id() == id){
-                conditions.add(c.getId());
-            }
-        }
-
-        //validate every single threshold
-        for(Threshold temp : tempList){
-            if(conditions.contains(temp.getCondition_id())){
-                if(!params.containsKey(temp.getParameterName())) { //we dont have this parameter
-                    return false;
-                }
-                //otherwise we have condition so continue
-
-
-                if(temp.isBoolean()){ //handle boolean logic
-                    boolean thresholdValue = Boolean.parseBoolean(temp.getValue());
-                    try{
-                       String paramValue = params.get(temp.getParameterName());
-                       if(paramValue == null) return false;
-                       boolean isBoolean = paramValue.equals("true") || paramValue.equals("false");
-                       if(!isBoolean) return false;
-                       boolean tempBoolean = Boolean.parseBoolean(paramValue);
-                       if(thresholdValue != tempBoolean) return false;
-
-                    }catch (Exception e) {
-                        return false;
-                    }
-
-                }else if(temp.isDouble()){ //handle integer logic
-
-                    double thresholdValue = Double.parseDouble(temp.getValue());
-                    try{
-                        String paramValue = params.get(temp.getParameterName());
-                        double tempDouble = Double.parseDouble(paramValue);
-                        if(thresholdValue > tempDouble) return false;
-                    }catch (Exception e){
-                        return false;
-                    }
-
-                }else
-                    return false; //not an integer or boolean
-
-            }
-        }
-        return true;
-    }
-
+    /**
+     * Remove an incentive
+     * and its subsequent conditions
+     */
     public int removeIncentive(int id){
         if(!incentiveRepository.existsById(id)) return -1;
         List<Condition> conditions = conditionRepository.findAll();
