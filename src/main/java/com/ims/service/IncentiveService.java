@@ -35,6 +35,8 @@ public class IncentiveService {
     /**
      * Method which returns the auth code
      * of client by their id
+     *
+     * @param client_id the clients id
      */
     public String getAuthCodeByClientID(int client_id) throws Exception {
         Client c = clientRepository.getOne(client_id);
@@ -46,6 +48,10 @@ public class IncentiveService {
     /**
      * Method which validates an auth code
      * by client auth
+     *
+     * @param incentive_id the incentives id
+     *
+     * @param client_id the clients id
      */
     public boolean validateAuthCodeByClientID(int incentive_id, int client_id){
 
@@ -88,6 +94,10 @@ public class IncentiveService {
      * Method which validates incentives, and checks if they are fulfilled
      * given a map of parameters which includes an auth key
      * and all threshold values under that incentive
+     *
+     * @param incentive_id the incentive id
+     *
+     * @param params the parameters from request body
      */
     public String incentiveFulfilled(int incentive_id, Map<String, String> params){
 
@@ -98,11 +108,10 @@ public class IncentiveService {
         if(params.containsKey("key")){
             String auth = params.get("key");
 
-            if(!validateAuthCode(auth,incentive_id)) return "Invalid Auth Code";
-
+            if(!validateAuthCode(auth,incentive_id)) return "Auth Code invalid or Incentive does not belong to you";
 
         }else
-            return "Missing auth key";
+            return "Missing auth key in request body";
 
         List<Condition> conditions = conditionRepository.getConditionsByIncentive(incentive_id);
         for(Condition c : conditions){
@@ -152,6 +161,8 @@ public class IncentiveService {
     /**
      * Remove an incentive
      * and its subsequent conditions
+     *
+     * @param id the incentive id
      */
     public int removeIncentive(int id){
         if(!incentiveRepository.existsById(id)) return -1;
@@ -169,7 +180,5 @@ public class IncentiveService {
 
     }
 
-    public int insertIncentive(Incentive incentive){
-        return 200;
-    }
+
 }

@@ -20,6 +20,8 @@ public class ConditionService {
     /**
      * Method which removes a condition
      * and all its subsequent thresholds
+     *
+     * @param condition the condition id
      */
     public int removeCondition(int condition){
         List<Threshold> thresholds = thresholdRepository.findAll();

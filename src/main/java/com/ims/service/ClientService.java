@@ -16,6 +16,8 @@ public class ClientService {
 
     /**
      * Register a new client
+     *
+     * @param client the client to be registered
      */
     public Client registerNewClient(Client client) throws Exception {
 

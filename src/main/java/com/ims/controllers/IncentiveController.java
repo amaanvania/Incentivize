@@ -25,20 +25,34 @@ public class IncentiveController {
         this.incentiveRepository = cr;
     }
 
+
+    /**
+     * Request mapping to return
+     * all incentives
+     */
     @GetMapping("/incentives")
     List<Incentive> all() {
         return incentiveRepository.findAll();
 
     }
 
+
+    /**
+     * Request mapping to return
+     * one incentive
+     */
     @GetMapping("/incentive/{id}")
     Incentive one(@PathVariable int id) {
         return incentiveRepository.getOne(id);
     }
 
 
+    /**
+     * Request mapping which generates API
+     * call for an incentive
+     */
     @GetMapping("/incentive/generateAPI/{incentive_id}/{client_id}")
-    String generateAPI(@PathVariable int incentive_id, @PathVariable int client_id) throws Exception {
+    Object generateAPI(@PathVariable int incentive_id, @PathVariable int client_id) throws Exception {
         try{
             boolean b = service.validateAuthCodeByClientID(incentive_id,client_id);
             if(!b) return "Incentive does not exist";
@@ -47,9 +61,14 @@ public class IncentiveController {
         }
 
         String authCode = service.getAuthCodeByClientID(client_id);
-        return apiService.generateAPIRequest(authCode,incentive_id);
+        return apiService.generateAPIRequestMap(authCode,incentive_id);
     }
 
+
+    /**
+     * Request mapping to check if an
+     * incentive is fulfilled
+     */
     @GetMapping("/incentive-fulfilled")
     String incentiveFulfilled(@RequestBody Map<String,String> allRequestParams) {
 
@@ -61,6 +80,11 @@ public class IncentiveController {
         } else return "Missing id";
     }
 
+
+    /**
+     * Request mapping to insert
+     * a new incentive
+     */
     @PostMapping("/incentives")
     void newIncentive(@RequestBody Incentive incentive) {
 

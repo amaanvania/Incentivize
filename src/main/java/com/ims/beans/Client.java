@@ -24,10 +24,11 @@ public class Client {
 
     };
 
-    public Client(int id, String userName, String password) {
+    public Client(int id, String userName, String password, String authCode) {
         this.id = id;
         this.userName = userName;
         this.password = password;
+        this.authCode = authCode;
     }
 
     //use this initially

@@ -15,17 +15,32 @@ public class ProjectController {
         this.projectRepository = cr;
     }
 
+
+    /**
+     * Request mapping to return
+     * all existing projects
+     */
     @GetMapping("/projects")
     List<Project> all() {
 
         return projectRepository.findAll();
     }
 
+
+    /**
+     * Request mapping to return
+     * a single project
+     */
     @GetMapping("/project/{id}")
     Project one(@PathVariable int id) {
         return projectRepository.getOne(id);
     }
 
+
+    /**
+     * Request mapping to insert
+     * a new project
+     */
     @PostMapping("/projects")
     void newProject(@RequestBody Project project) {
         Project newProject = projectRepository.save(project);

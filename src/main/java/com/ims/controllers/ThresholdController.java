@@ -14,17 +14,31 @@ public class ThresholdController {
         this.thresholdRepository = cr;
     }
 
+
+    /**
+     * Request mapping to return
+     * all existing thresholds
+     */
     @GetMapping("/thresholds")
     List<Threshold> all() {
         return thresholdRepository.findAll();
     }
 
+
+    /**
+     * Request mapping to return
+     * all existing projects
+     */
     @GetMapping("/threshold/{id}")
     Threshold one(@PathVariable int id) {
 
         return thresholdRepository.getOne(id);
     }
 
+    /**
+     * Request mapping to insert
+     * a new threshold
+     */
     @PostMapping("/thresholds")
     void newThreshold(@RequestBody Threshold threshold) {
 
@@ -33,6 +47,11 @@ public class ThresholdController {
 
     }
 
+
+    /**
+     * Request mapping to delete an
+     * existing threshold
+     */
     @DeleteMapping("/threshold/{id}")
     int remove(@PathVariable int id) {
         thresholdRepository.deleteById(id);

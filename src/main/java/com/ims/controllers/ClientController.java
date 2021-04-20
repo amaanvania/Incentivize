@@ -21,16 +21,36 @@ public class ClientController {
         this.clientRepository = clientRepository;
     }
 
+    /**
+     * Request Mapping for all clients
+     */
     @GetMapping("/clients")
     List<Client> all() {
        return clientRepository.findAll();
     }
 
+    /**
+     * Request Mapping for one client
+     */
     @GetMapping("/client/{id}")
     Client one(@PathVariable int id) {
        return clientRepository.getOne(id);
     }
 
+
+    /**
+     * Request mapping for auth code of
+     * one client
+     */
+    @GetMapping("/client/auth/{id}")
+    String oneAuth(@PathVariable int id) {
+        return clientRepository.getOne(id).getAuthCode();
+    }
+
+    /**
+     * Request mapping to insert
+     * a new client
+     */
     @PostMapping("/clients")
     void newClient(@RequestBody Client client) throws Exception {
         Client newClient = clientService.registerNewClient(client);
