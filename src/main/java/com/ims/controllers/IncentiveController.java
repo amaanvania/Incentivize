@@ -87,11 +87,7 @@ public class IncentiveController {
      */
     @PostMapping("/incentives")
     void newIncentive(@RequestBody Incentive incentive) {
-
-
         Incentive newIncentive = incentiveRepository.save(incentive);
-
-
     }
 
     @DeleteMapping("/incentive/{id}")

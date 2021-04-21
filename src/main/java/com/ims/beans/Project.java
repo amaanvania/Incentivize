@@ -24,6 +24,9 @@ public class Project {
     //name of the project
     String name;
 
+    public Project(){
+
+    }
     public Project(int id, int clientId, String name) {
         this.id = id;
         this.clientId = clientId;
