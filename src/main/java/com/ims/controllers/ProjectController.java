@@ -3,9 +3,11 @@ package com.ims.controllers;
 import com.ims.beans.Project;
 import com.ims.repository.ProjectRepository;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ProjectController {
     private final ProjectRepository projectRepository;

@@ -6,10 +6,12 @@ import com.ims.service.APIService;
 import com.ims.service.IncentiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class IncentiveController {
     private final IncentiveRepository incentiveRepository;
