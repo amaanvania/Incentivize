@@ -3,9 +3,11 @@ package com.ims.controllers;
 import com.ims.beans.Threshold;
 import com.ims.repository.ThresholdRepository;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ThresholdController {
     private final ThresholdRepository thresholdRepository;
