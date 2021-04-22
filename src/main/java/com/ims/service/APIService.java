@@ -33,7 +33,7 @@ public class APIService {
         result.append(",\n");
         result.append("\tkey:" + auth);
         result.append(",\n");
-       for(int i = 0; i < thresholds.size(); i++){
+        for(int i = 0; i < thresholds.size(); i++){
             result.append("\t" + thresholds.get(i) + ": ?");
             if(i < thresholds.size() - 1)
                 result.append(",\n");

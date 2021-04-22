@@ -64,7 +64,7 @@ public class IncentiveService {
 
         Client curr = clients.get(0);
 
-        List<Integer> incentives = incentiveRepository.getIncentivesByclientID(curr.getId());
+        List<Integer> incentives = incentiveRepository.getIncentivesIDsByclientID(curr.getId());
         return incentives.contains(incentive_id);
 
     }
@@ -85,7 +85,7 @@ public class IncentiveService {
 
         Client curr = clients.get(0);
 
-        List<Integer> incentives = incentiveRepository.getIncentivesByclientID(curr.getId());
+        List<Integer> incentives = incentiveRepository.getIncentivesIDsByclientID(curr.getId());
         return incentives.contains(incentive_id);
 
     }

@@ -24,7 +24,6 @@ public class ProjectController {
      */
     @GetMapping("/projects")
     List<Project> all() {
-
         return projectRepository.findAll();
     }
 

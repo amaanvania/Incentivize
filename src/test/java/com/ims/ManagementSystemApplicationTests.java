@@ -91,7 +91,7 @@ public class ManagementSystemApplicationTests {
 
 		when(projectMock.getProjectsUnderClient(Mockito.anyInt())).thenReturn(projects);
 		when(isMock.getIncentivesByID(Mockito.anyInt())).thenReturn(incentiveList);
-		when(isMock.getIncentivesByclientID(Mockito.anyInt())).thenReturn(Arrays.asList(1));
+		when(isMock.getIncentivesIDsByclientID(Mockito.anyInt())).thenReturn(Arrays.asList(1));
 		when(crMock.getConditionsByIncentive(Mockito.anyInt())).thenReturn(clist);
 		when(clrMock.getClientByAuthCode(Mockito.anyString())).thenReturn(clientList);
 		when(thrMock.getThresholdsByCondition(Mockito.anyInt())).thenReturn(tlist);
@@ -123,7 +123,7 @@ public class ManagementSystemApplicationTests {
 
 		when(projectMock.getProjectsUnderClient(Mockito.anyInt())).thenReturn(projects);
 		when(isMock.getIncentivesByID(Mockito.anyInt())).thenReturn(incentiveList);
-		when(isMock.getIncentivesByclientID(Mockito.anyInt())).thenReturn(Arrays.asList(1));
+		when(isMock.getIncentivesIDsByclientID(Mockito.anyInt())).thenReturn(Arrays.asList(1));
 		when(crMock.getConditionsByIncentive(Mockito.anyInt())).thenReturn(clist);
 		when(clrMock.getClientByAuthCode(Mockito.anyString())).thenReturn(clientList);
 		when(thrMock.getThresholdsByCondition(Mockito.anyInt())).thenReturn(tlist);

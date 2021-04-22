@@ -72,7 +72,7 @@ public class Threshold {
     public boolean isBoolean(){
        boolean returnValue = false;
 
-       if(getValue().equals("true") || getValue().equals("false")) returnValue = true;
+       if(getValue().toLowerCase().equals("true") || getValue().toLowerCase().equals("false")) returnValue = true;
 
        return returnValue;
     }

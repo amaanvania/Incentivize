@@ -5,6 +5,7 @@ import com.ims.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -41,6 +42,23 @@ public class ClientService {
         }
 
         return auth;
+    }
+
+    /**
+     * Login a client
+     *
+     * @param username the username of the client attempting to login
+     *
+     * @param password the password of the client
+     */
+    public int loginService(String username, String password){
+        List<Client> clients = clientRepository.getClientByUserName(username);
+        if(clients.size() > 0){
+            Client c = clients.get(0);
+            if(c.getPassword().equals(password))
+                return 200;
+        }
+        return -1;
     }
 
 

@@ -38,6 +38,16 @@ public class IncentiveController {
 
     }
 
+    /**
+     * Request mapping to return
+     * all incentives
+     */
+    @GetMapping("/incentives/client/{id}")
+    List<Incentive> byClientID(@PathVariable int id) {
+        return incentiveRepository.getIncentivesByclientID(id);
+
+    }
+
 
     /**
      * Request mapping to return
@@ -46,6 +56,18 @@ public class IncentiveController {
     @GetMapping("/incentive/{id}")
     Incentive one(@PathVariable int id) {
         return incentiveRepository.getOne(id);
+    }
+
+
+    /**
+     * Request mapping to update an incentive
+     */
+    @PostMapping("/incentive/update")
+    void updateIncentive(@RequestBody Incentive i){
+
+        if(incentiveRepository.existsById(i.getId()))
+            incentiveRepository.save(i);
+
     }
 
 
@@ -63,7 +85,8 @@ public class IncentiveController {
         }
 
         String authCode = service.getAuthCodeByClientID(client_id);
-        return apiService.generateAPIRequestMap(authCode,incentive_id);
+        //return apiService.generateAPIRequestMap(authCode,incentive_id);
+        return apiService.generateAPIRequestString(authCode,incentive_id);
     }
 
 

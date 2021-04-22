@@ -41,6 +41,14 @@ public class ClientController {
 
 
     /**
+     * Request Mapping for to handle logging in
+     */
+    @GetMapping("/client/login/{user}/{pass}")
+    int loginClient(@PathVariable String user, @PathVariable String pass){
+        return clientService.loginService(user,pass);
+    }
+
+    /**
      * Request mapping for auth code of
      * one client
      */

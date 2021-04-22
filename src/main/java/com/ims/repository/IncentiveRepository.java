@@ -19,6 +19,12 @@ public interface IncentiveRepository extends JpaRepository<Incentive, Integer> {
             "FROM incentive.projects p join incentive.incentives i \n" +
             "on p.id = i.projectid\n" +
             "where i.id = ?1", nativeQuery = true)
-    List<Integer> getIncentivesByclientID(int clientID);
+    List<Integer> getIncentivesIDsByclientID(int clientID);
+
+    @Query(value = "SELECT i.id, i.category, i.name, i.projectid\n" +
+            "FROM incentive.projects p join incentive.incentives i\n" +
+            "on p.id = i.projectid\n" +
+            "where i.id = ?1", nativeQuery = true)
+    List<Incentive> getIncentivesByclientID(int clientID);
 
 }
