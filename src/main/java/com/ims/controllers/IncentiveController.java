@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 public class IncentiveController {
     private final IncentiveRepository incentiveRepository;
@@ -32,6 +32,7 @@ public class IncentiveController {
      * Request mapping to return
      * all incentives
      */
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/incentives")
     List<Incentive> all() {
         return incentiveRepository.findAll();
@@ -42,6 +43,7 @@ public class IncentiveController {
      * Request mapping to return
      * all incentives
      */
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/incentives/client/{id}")
     List<Incentive> byClientID(@PathVariable int id) {
         return incentiveRepository.getIncentivesByclientID(id);
@@ -53,6 +55,7 @@ public class IncentiveController {
      * Request mapping to return
      * one incentive
      */
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/incentive/{id}")
     Incentive one(@PathVariable int id) {
         return incentiveRepository.getOne(id);
@@ -62,6 +65,7 @@ public class IncentiveController {
     /**
      * Request mapping to update an incentive
      */
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/incentive/update")
     void updateIncentive(@RequestBody Incentive i){
 
@@ -75,6 +79,7 @@ public class IncentiveController {
      * Request mapping which generates API
      * call for an incentive
      */
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/incentive/generateAPI/{incentive_id}/{client_id}")
     Object generateAPI(@PathVariable int incentive_id, @PathVariable int client_id) throws Exception {
         try{
@@ -94,6 +99,7 @@ public class IncentiveController {
      * Request mapping to check if an
      * incentive is fulfilled
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/incentive-fulfilled")
     String incentiveFulfilled(@RequestBody Map<String,String> allRequestParams) {
 
@@ -110,11 +116,13 @@ public class IncentiveController {
      * Request mapping to insert
      * a new incentive
      */
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/incentives")
     void newIncentive(@RequestBody Incentive incentive) {
         Incentive newIncentive = incentiveRepository.save(incentive);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/incentive/{id}")
     int remove(@PathVariable int id) {
         return service.removeIncentive(id);

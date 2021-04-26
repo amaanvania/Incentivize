@@ -52,11 +52,20 @@ public class ClientService {
      * @param password the password of the client
      */
     public int loginService(String username, String password){
+
+        System.out.printf("Received login request with %s, %s \n",username,password);
+
+
         List<Client> clients = clientRepository.getClientByUserName(username);
         if(clients.size() > 0){
             Client c = clients.get(0);
-            if(c.getPassword().equals(password))
+            System.out.println("Found client: " + c.getUserName());
+            if(c.getPassword().equals(password)) {
+                System.out.printf("form password: %s matches with client password %s \n",password,c.getPassword());
                 return 200;
+            }else {
+                System.out.printf("form password: %s does not match with client password %s \n",password,c.getPassword());
+            }
         }
         return -1;
     }
