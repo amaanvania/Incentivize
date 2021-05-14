@@ -1,4 +1,3 @@
-# incentive-management-system
+# INCENTIVIZE
 
-This project is a Universal Incentive Management System
-for the C4/Eng4k Capstone
+This project is a Universal Incentive Management System which allows developers to create and track incentives for their given projects and applications.
